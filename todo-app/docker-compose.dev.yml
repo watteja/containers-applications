@@ -2,10 +2,34 @@ services:
   app:
     image: todo-front-dev # reference the pre-built image
     volumes:
-      - ./todo-frontend:/usr/src/app
-    ports:
-      - 5173:5173
+      - ./todo-frontend/:/usr/src/app
     container_name: todo-front-dev
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: the_database
+    volumes:
+      - ./todo-backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - ./todo-backend/mongo_data:/data/db
+
+  redis:
+    image: redis
+    command: ["redis-server", "--appendonly", "yes"] # Overwrite the default image CMD to be: redis-server --appendonly yes
+    volumes:
+      - ./todo-backend/redis_data:/data
+
+  server:
+    image: todo-backend-dev
+    volumes:
+      - ./todo-backend/:/usr/src/app
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - MONGO_URL=mongodb://the_username:the_password@mongo:27017/the_database
+      - NODE_ENV=development
+    container_name: todo-backend-dev
 
   nginx:
     image: nginx:1.20.1
@@ -16,3 +40,4 @@ services:
     container_name: reverse-proxy
     depends_on:
       - app # wait for the frontend container to be started (and the corresponding entry to be added to DNS)
+      - server
