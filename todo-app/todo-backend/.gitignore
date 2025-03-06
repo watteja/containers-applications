@@ -1,6 +1,9 @@
 # Redis volume
 redis_data/
 
+# Mongo volume
+mongo_data/
+
 # Logs
 logs
 *.log
