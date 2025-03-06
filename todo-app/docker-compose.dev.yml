@@ -1,0 +1,18 @@
+services:
+  app:
+    image: todo-front-dev # reference the pre-built image
+    volumes:
+      - ./todo-frontend:/usr/src/app
+    ports:
+      - 5173:5173
+    container_name: todo-front-dev
+
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reverse-proxy
+    depends_on:
+      - app # wait for the frontend container to be started (and the corresponding entry to be added to DNS)
