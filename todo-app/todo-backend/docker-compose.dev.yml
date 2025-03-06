@@ -4,6 +4,8 @@ services:
     ports:
       - 3456:27017
     environment:
+      # production credentials should not be exposed in code like this,
+      # but you left this toy example to illustrate another way of declaring environment variables
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
       MONGO_INITDB_DATABASE: the_database

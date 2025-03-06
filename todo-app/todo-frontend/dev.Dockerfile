@@ -13,3 +13,6 @@ USER node
 
 # npm run dev is the command to start the application in development mode
 CMD ["npm", "run", "dev", "--", "--host"]
+
+# Build as 'todo-front-dev' to work with (development) docker-compose
+# docker build -t todo-front-dev -f ./dev.Dockerfile .

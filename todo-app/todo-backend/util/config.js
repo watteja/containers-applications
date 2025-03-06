@@ -1,6 +1,4 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
+require("dotenv").config();
 
 const MONGO_URL = process.env.MONGO_URL || undefined;
 const REDIS_URL = process.env.REDIS_URL || undefined;
