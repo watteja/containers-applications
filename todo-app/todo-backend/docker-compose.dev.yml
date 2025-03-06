@@ -14,7 +14,10 @@ services:
   redis:
     image: redis
     ports:
-      - 3457:6379
+      - 3457:6379 # Map to arbitrary localhost port
+    command: ["redis-server", "--appendonly", "yes"] # Overwrite the default image CMD to be: redis-server --appendonly yes
+    volumes: # Declare the volume
+      - ./redis_data:/data
 
 volumes:
   mongo_data:

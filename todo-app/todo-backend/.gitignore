@@ -1,3 +1,6 @@
+# Redis volume
+redis_data/
+
 # Logs
 logs
 *.log
