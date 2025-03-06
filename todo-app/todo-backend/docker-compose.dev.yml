@@ -9,8 +9,8 @@ services:
       MONGO_INITDB_DATABASE: the_database
     volumes:
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
-      # - ./mongo_data:/data/db # this way of declaring volumes did not work for me (probably I should have changed some permissions)
-      - mongo_data:/data/db
+      - ./mongo_data:/data/db
+      # - mongo_data:/data/db
 
   redis:
     image: redis
@@ -19,6 +19,5 @@ services:
     command: ["redis-server", "--appendonly", "yes"] # Overwrite the default image CMD to be: redis-server --appendonly yes
     volumes: # Declare the volume
       - ./redis_data:/data
-
-volumes:
-  mongo_data:
+# volumes:
+#   mongo_data:
