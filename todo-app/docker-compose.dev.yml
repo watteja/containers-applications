@@ -30,7 +30,7 @@ services:
     container_name: todo-front-dev
     environment:
       - NODE_ENV=development
-    # VITE_BACKEND_URL specified in the image file, as an example
+    # VITE_BACKEND_URL has to be set during build time
     volumes:
       - ./todo-frontend/:/usr/src/app
 

@@ -23,8 +23,6 @@ services:
     image: todo-front
     container_name: todo-front
     environment:
-      # following var has value from .env file in the same directory, as an example
-      - VITE_BACKEND_URL
       - NODE_ENV=production
     volumes:
       - static_data:/usr/src/app/dist
